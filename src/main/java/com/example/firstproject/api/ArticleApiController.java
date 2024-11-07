@@ -18,18 +18,16 @@ public class ArticleApiController {                     // 314p
     @Autowired
     private ArticleService articleService;           // 서비스 객체 주입
 
-    //
-//    // GET
+
+    // GET
     @GetMapping("/api/articles")
     public List<Article> index() {
         return articleService.index();
-//      return articleRepository.findAll();
     }
 
     @GetMapping("/api/articles/{id}")
     public Article show(@PathVariable Long id) {
         return articleService.show(id);
-//        return articleRepository.findById(id).orElse(null);
     }
 
     // POST
@@ -63,8 +61,7 @@ public class ArticleApiController {                     // 314p
 
     // Transaction
     @PostMapping("/api/transaction-test") // 여러 게시를 생성 요청 접수
-    public ResponseEntity<List<Article>> transactionTest
-        (@RequestBody List<ArticleForm> dtos){
+    public ResponseEntity<List<Article>> transactionTest(@RequestBody List<ArticleForm> dtos){
         List<Article> createdList = articleService.createArticles(dtos);
         return (createdList != null)?
                 ResponseEntity.status(HttpStatus.OK).body(createdList):
