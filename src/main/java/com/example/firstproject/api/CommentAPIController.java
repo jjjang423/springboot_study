@@ -49,6 +49,5 @@ public class CommentAPIController {
         CommentDto deletedDto = commentService.delete(id);
         // 결과 응답
         return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
-
     }
 }
