@@ -18,7 +18,6 @@ public class ArticleApiController {                     // 314p
     @Autowired
     private ArticleService articleService;           // 서비스 객체 주입
 
-
     // GET
     @GetMapping("/api/articles")
     public List<Article> index() {
