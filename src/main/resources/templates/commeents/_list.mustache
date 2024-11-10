@@ -11,8 +11,11 @@
                         data-bs-id="{{id}}"
                         data-bs-nickname="{{nickname}}"
                         data-bs-body="{{body}}"
-                        data-bs-article-id="{{articleId}}">
-                    수정</button>
+                        data-bs-article-id="{{articleId}}">수정</button>
+                <!--댓글 삭제 버튼-->
+                <button type="button"
+                        class="btn btn-sm btn-outline-danger comment-delete-btn"
+                        data-comment-id="{{id}}">삭제</button>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="comment-edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,7 +109,43 @@
         // 현재 페이지 새로 고침
         window.location.reload();
 });
-
+</script>
+        <!--댓글삭제-->
+        <script>
+            {
+        // 삭제 버튼 선택
+        const commentDeletBtnS = document.querySelectorAll(".comment-delete-btn");
+        // 삭제 버튼 이벤트 처리
+        /*commentDeletBtn.addEventListener("click", function(){
+            console.log("삭제 버튼이 클릭됐습니다..!");
+         });*/
+        commentDeletBtns.forEach(btn => {
+            btn.addEventListener("click", (event) => {
+            // 이벤트 발생 요소 선택
+            const commentDeleteBtn = event.target;
+            // 삭제 댓글 id 가져오기
+            const commentId = commentDeleteBtn.getAttribute("data-comment-id");
+            console.log(`삭제 버튼: ${commentId}번 댓글`);
+            // 삭제 REST API 호출
+            const url = `/api/comments/${commentId}`;
+            fetch(url, {
+            method: "DELETE"
+            }).then(response => {
+            // 댓글 삭제 실패 처리
+            if(!response.ok){
+            alert("댓글 삭제 실패..!");
+            return;
+            }
+            // 삭제 성공 시 메세지 창 띄우기
+            const msg = `${commentId}번 댓글을 삭제했습니다.`;
+            alert(msg);
+            // 현재 페이지 새로 고침
+            window.location.reload();
+            });
+            }
+            });
+});
+}
 </script>
     {{/commentDtos}}
 </div>
