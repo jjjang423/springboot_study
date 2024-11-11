@@ -49,8 +49,7 @@ public class ArticleController {
 
         return "redirect:/articles/" + saved.getId();
     }
-
-
+    
     // GET
     @GetMapping("/articles/{id}")
     public  String show(@PathVariable Long id, Model model){
